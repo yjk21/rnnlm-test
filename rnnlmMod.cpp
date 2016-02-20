@@ -247,12 +247,12 @@ class CRnnLMaccess : public CRnnLM{
         }
 
         void dumpSynapses(){
-            writeSynapse(this->layer1_size, this->layer0_size, this->syn0, "tmp/syn0init.bin");
-            writeSynapse(this->layer2_size, this->layer1_size, this->syn1, "tmp/syn1init.bin");
+            writeSynapse(this->layer1_size, this->layer0_size, this->syn0, "/tmp/syn0init.bin");
+            writeSynapse(this->layer2_size, this->layer1_size, this->syn1, "/tmp/syn1init.bin");
         }
 
         void dumpVocab(){
-            ofstream fl("tmp/voc.txt", ios::out);
+            ofstream fl("/tmp/voc.txt", ios::out);
 
             for(int it = 0; it < this->vocab_size; it++){
                 //printf("%s\n", this->vocab[it].word);
@@ -1013,6 +1013,9 @@ int main(int argc, char **argv)
         if (use_lmprob) model1.setLMProbFile(lmprob_file);
         model1.setDebugMode(debug_mode);
 
+        model1.restoreNet();
+        model1.dumpVocab();
+        model1.dumpSynapses();
         if (nbest==0) model1.testNet();
         else model1.testNbest();
     }

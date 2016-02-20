@@ -34,9 +34,13 @@ if __name__ == "__main__":
     wordMap = ru.readVocab()
     M = len(wordMap)+1
 
-    xtr, xte = ru.getData2(wordMap,prefix='dbglfm0')
+    xtr, xte = ru.getData(wordMap,prefix='dbglfm0')
     Wi0, Wh0, Wo0 = ru.loadParams(D,M)
     Wo0 = Wo0[:M,:]
+
+    print Wo0.shape
+
+    sys.exit()
 
     h0 = (0.1*ones(D))
 
